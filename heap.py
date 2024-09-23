@@ -5,31 +5,31 @@ T = TypeVar('T')
 class MinHeap(Generic[T]):
     
     def __init__(self, arr: List[T] = None) -> None:
-        # Initialize the heap from an array if provided, else an empty list
+
         self.heap: List[T] = arr if arr else []
         if arr:
             self.build_min_heap()
 
     def parent(self, i: int) -> int:
-        # Returns index of the parent using bit manipulation (i-1) // 2
+
         return (i - 1) >> 1
 
     def left(self, i: int) -> int:
-        # Returns index of the left child using bit manipulation 2*i + 1
+
         return (i << 1) + 1
 
     def right(self, i: int) -> int:
-        # Returns index of the right child using bit manipulation 2*i + 2
+        
         return (i << 1) + 2
 
     def build_min_heap(self) -> None:
-        # Build a min heap by heapifying from the last parent node down to the root
+        
         n = len(self.heap)
         for i in range((n // 2) - 1, -1, -1):
             self.heapify(n, i)
 
     def heapify(self, n: int, i: int) -> None:
-        # Ensure that the subtree rooted at index i maintains the heap property
+        
         smallest = i
         left = self.left(i)
         right = self.right(i)
@@ -44,7 +44,7 @@ class MinHeap(Generic[T]):
             self.heapify(n, smallest)
 
     def insert(self, value: T) -> None:
-        # Insert a new element into the heap
+        
         self.heap.append(value)
         i = len(self.heap) - 1
         parent = self.parent(i)
@@ -55,7 +55,7 @@ class MinHeap(Generic[T]):
             parent = self.parent(i)
 
     def pop(self) -> T:
-        # Remove and return the root element (smallest), then restore heap property
+        # Remove and return the root element , then restore heap property
         if not self.heap:
             return None
 
@@ -73,7 +73,7 @@ class MinHeap(Generic[T]):
         return self.heap[0] if self.heap else None
 
     def __str__(self) -> str:
-        # String representation for easy visualization of the heap
+        
         return str(self.heap)
 
 # Example usage of the MinHeap
